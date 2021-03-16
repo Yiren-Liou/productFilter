@@ -94,17 +94,20 @@ let data = [
 //#endregion
 
 
+const addTicketBtn = document.querySelector('#jsAddTicketBtn');
 const userSelectArea = document.querySelector('#jsUserSelect');
 const selectAreaList = document.querySelector('#jsSpotList');
 const searchItemNums = document.querySelector('#jsSearchItemNums');
 
 userSelectArea.addEventListener('change',updateArea);
+addTicketBtn.addEventListener('click', addTicket);
 
 let spotList = "";
 init();
 
 //#region 網頁初始狀態
 function init(){
+  spotList = "";
   data.forEach(function(filterArea){
     let spotItem = `
       <div class="col-md-4 mb-5">
@@ -174,7 +177,23 @@ function updateArea(){
 }
 //#endregion
 
-
+//#region 新增套票
+function addTicket(){
+  let newTicket = {
+    "id": data.length,
+    "name": document.querySelector('#ticketName').value,
+    "imgUrl": document.querySelector('#ticketImgUrl').value,
+    "area": document.querySelector('#ticketSpotRegion').value,
+    "description": document.querySelector('#ticketDescribe').value,
+    "group": document.querySelector('#ticketAmount').value,
+    "price": document.querySelector('#ticketPrice').value,
+    "rate": document.querySelector('#ticketStar').value
+  }
+  data.push(newTicket);
+  console.log(data);
+  init();
+}
+//#endregion 
 
 
 
