@@ -114,15 +114,6 @@ body {
   border-radius: 0 0.25rem 0.25rem 0;
 }
 
-.card-img-top {
-  width: 100%;
-  height: 200px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
-}
-
 .card-footer {
   background-color: #fff;
   border: none;
