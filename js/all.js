@@ -145,9 +145,7 @@ function updateArea(){
     return;
   }else{
     // 根據使用者選擇的區域篩選資料[]
-    let filterData = data.filter(function(item){
-      return userSelectArea.value == item.area
-    });
+    let filterData = data.filter(item => item.area == userSelectArea.value);
     filterData.forEach(function(item){
       let spotItem = `
         <div class="col-md-4 mb-5">
