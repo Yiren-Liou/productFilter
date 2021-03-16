@@ -186,10 +186,17 @@ function addTicket(){
     "group": document.querySelector('#ticketAmount').value,
     "price": document.querySelector('#ticketPrice').value,
     "rate": document.querySelector('#ticketStar').value
-  }
-  data.push(newTicket);
+  };
+  data.unshift(newTicket);
   console.log(data);
   init();
+  document.querySelector('#ticketName').value = "";
+  document.querySelector('#ticketImgUrl').value = "";
+  document.querySelector('#ticketSpotRegion').value = "";
+  document.querySelector('#ticketDescribe').value = "";
+  document.querySelector('#ticketAmount').value = "";
+  document.querySelector('#ticketPrice').value = "";
+  document.querySelector('#ticketStar').value = "";
 }
 //#endregion 
 

@@ -59,6 +59,9 @@ body{
 
 .spotListItem{
   box-shadow: 0px 3px 6px #00000029;
+  &:hover{
+    box-shadow: 0px 10px 20px #00000029;
+  }
 }
 
 .spotRegionTag{
