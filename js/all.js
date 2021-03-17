@@ -98,18 +98,21 @@ const addTicketBtn = document.querySelector('#jsAddTicketBtn');
 const userSelectArea = document.querySelector('#jsUserSelect');
 const selectAreaList = document.querySelector('#jsSpotList');
 const searchItemNums = document.querySelector('#jsSearchItemNums');
+const ticketStar = document.querySelector('#ticketStar');
+
 
 userSelectArea.addEventListener('change',updateArea);
 addTicketBtn.addEventListener('click', addTicket);
+ticketStar.addEventListener('input',limitStar);
 
 let spotList = "";
-// let filterData = data;
-init();
+let filterData = data;
+showTicket(data);
 
 //#region 網頁初始狀態
-function init(){
+function showTicket(spotData){
   spotList = "";
-  data.forEach(function(item){
+  spotData.forEach(function(item){
     let spotItem = `
       <div class="col-md-4 mb-5">
         <a class="spotListItem card h-100" href="#">
@@ -133,7 +136,7 @@ function init(){
     spotList += spotItem;
   });
   selectAreaList.innerHTML = spotList;
-  searchItemNums.textContent = `${data.length}`;
+  searchItemNums.textContent = `${spotData.length}`;
 }
 //#endregion
 
@@ -142,36 +145,12 @@ function updateArea(){
   spotList = "";
   // 使用者選擇"全部區域""
   if(userSelectArea.value == "全部地區"){
-    init();
+    showTicket(data);
     return;
   }else{
     // 根據使用者選擇的區域篩選資料[]
-    let filterData = data.filter(item => item.area == userSelectArea.value);
-    filterData.forEach(function(item){
-      let spotItem = `
-        <div class="col-md-4 mb-5">
-          <a class="spotListItem card h-100" href="#">
-            <div class="spotRegionTag">${item.area}</div>
-              <img src="${item.imgUrl}" class="card-img-top" alt="...">
-              <div class="card-body mb-3">
-                <div class="spotReginStar bgPrimary">${item.rate}</div>
-                <h5 class="spotTitle card-title">${item.name}</h5>
-                <p class="spotDescribe card-text">${item.description}</p>
-              </div>
-              <div class="card-footer textPrimary d-flex justify-content-between align-items-center">
-                <p class="">
-                  <i class="fas fa-exclamation-circle"></i>
-                  剩下最後 ${item.group} 組
-                </p>
-                <p class="d-flex align-items-center">TWD<span class="fontSizeL ms-2">$${item.price}</span></p>
-              </div>
-            </a>
-          </div>
-        `;
-      spotList += spotItem;
-    });
-    searchItemNums.textContent = `${filterData.length}`;
-    selectAreaList.innerHTML = spotList;
+    filterData = data.filter(item => item.area == userSelectArea.value);
+    showTicket(filterData);
   }
 }
 //#endregion
@@ -189,8 +168,7 @@ function addTicket(){
     rate: document.querySelector('#ticketStar').value
   };
   data.unshift(newTicket);
-  console.log(data);
-  init();
+  showTicket(data);
   document.querySelector('#ticketName').value = "";
   document.querySelector('#ticketImgUrl').value = "";
   document.querySelector('#ticketSpotRegion').value = "";
@@ -199,7 +177,16 @@ function addTicket(){
   document.querySelector('#ticketPrice').value = "";
   document.querySelector('#ticketStar').value = "";
 }
-//#endregion 
+//#endregion
+
+//#region 限制用鍵盤輸入套票星級
+function limitStar(){
+  if(ticketStar.value < 0 || ticketStar.value > 10){
+    alert('套票星級區間為 1 - 10 分，請重新輸入星級!');
+    ticketStar.value = "";
+  }
+}
+//#endregion
 
 
 
