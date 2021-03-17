@@ -98,12 +98,16 @@ const addTicketBtn = document.querySelector('#jsAddTicketBtn');
 const userSelectArea = document.querySelector('#jsUserSelect');
 const selectAreaList = document.querySelector('#jsSpotList');
 const searchItemNums = document.querySelector('#jsSearchItemNums');
-const ticketStar = document.querySelector('#ticketStar');
 
+const ticketStar = document.querySelector('#ticketStar');
+const ticketPrice = document.querySelector('#ticketPrice');
+const ticketAmount = document.querySelector('#ticketAmount');
 
 userSelectArea.addEventListener('change',updateArea);
 addTicketBtn.addEventListener('click', addTicket);
-ticketStar.addEventListener('input',limitStar);
+ticketStar.addEventListener('input',limitAlert);
+ticketPrice.addEventListener('input',limitAlert);
+ticketAmount.addEventListener('input',limitAlert);
 
 let spotList = "";
 let filterData = data;
@@ -180,10 +184,14 @@ function addTicket(){
 //#endregion
 
 //#region 限制用鍵盤輸入套票星級
-function limitStar(){
-  if(ticketStar.value < 0 || ticketStar.value > 10){
-    alert('套票星級區間為 1 - 10 分，請重新輸入星級!');
-    ticketStar.value = "";
+function limitAlert(e){
+  if((e.target.id == 'ticketStar') && (e.target.value < 1 || e.target.value > 10)){
+    alert(`${this.name}區間為 1 - 10 分，請重新輸入星級!`);
+    e.target.value = "";  
+  }
+  else if(e.target.value < 1){
+    alert(`${this.name}必須大於 0 ，請重新輸入!`);
+    e.target.value = "";
   }
 }
 //#endregion
