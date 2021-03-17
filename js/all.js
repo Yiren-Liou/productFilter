@@ -103,6 +103,7 @@ userSelectArea.addEventListener('change',updateArea);
 addTicketBtn.addEventListener('click', addTicket);
 
 let spotList = "";
+// let filterData = data;
 init();
 
 //#region 網頁初始狀態
@@ -178,14 +179,14 @@ function updateArea(){
 //#region 新增套票
 function addTicket(){
   let newTicket = {
-    "id": data.length,
-    "name": document.querySelector('#ticketName').value,
-    "imgUrl": document.querySelector('#ticketImgUrl').value,
-    "area": document.querySelector('#ticketSpotRegion').value,
-    "description": document.querySelector('#ticketDescribe').value,
-    "group": document.querySelector('#ticketAmount').value,
-    "price": document.querySelector('#ticketPrice').value,
-    "rate": document.querySelector('#ticketStar').value
+    id: data.length,
+    name: document.querySelector('#ticketName').value,
+    imgUrl: document.querySelector('#ticketImgUrl').value,
+    area: document.querySelector('#ticketSpotRegion').value,
+    description: document.querySelector('#ticketDescribe').value,
+    group: document.querySelector('#ticketAmount').value,
+    price: document.querySelector('#ticketPrice').value,
+    rate: document.querySelector('#ticketStar').value
   };
   data.unshift(newTicket);
   console.log(data);
